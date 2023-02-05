@@ -1,4 +1,3 @@
-#*.sqlite3
 update-repo.sh
 react/node_modules/
 logs
