@@ -1,0 +1,47 @@
+body {
+    overflow: hidden;    
+}
+
+#root {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main-conteiner {
+    display: flex;
+    flex-direction: column;
+}
+.not-padding {
+    padding: 0;
+}
+.height-100{
+    height: 100%;
+}
+
+.pagination-bottom{
+    position: absolute;
+    bottom: 0;
+}
+
+.button-bottom{
+    position: absolute;
+    bottom: 0;
+}
+
+.card-height {
+    height: 19rem;
+}
+
+.eda-content-owner {
+    position: relative;
+    height: 800px;
+
+}
+
+.eda-content {
+    position: absolute;
+    overflow-y: auto;
+    overflow-x: hidden;
+    bottom: 0;
+    top: 0;
+}
