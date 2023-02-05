@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from eda.views import CategoriesViewSet, EdaViewSet, get_image
+from eda.views import CategoriesViewSet, EdaViewSet, get_image, get_index_page
 from main.swagger import get_swagger_url
 from main.userapi import UserViewSet
 
@@ -29,6 +29,7 @@ router.register(r'eda', EdaViewSet)
 #https://habr.com/ru/company/otus/blog/583220/
 
 urlpatterns = [
+    path("", get_index_page),
     path('api/', include(router.urls)),
     path('api/image/<str:guid>', get_image),
     #path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

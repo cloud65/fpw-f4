@@ -19,9 +19,14 @@ const Categories=props=> {
     const count = responseData.count;
     const pageCount = Math.trunc(count/limit)+1;
     
+    const onLoad=(data)=>{
+        setLoading(false); 
+        setData(data)
+    }
+    
     React.useEffect(()=>{
         setLoading(true)
-        Request(`/categories/?limit=${limit}&offset=${limit*(page-1)}`, (data)=>{setLoading(true); setData(data)})
+        Request(`/categories/?limit=${limit}&offset=${limit*(page-1)}`, onLoad)
     }, [params.page])
     
     if (loading) return <Spinner animation="border" role="status"/>

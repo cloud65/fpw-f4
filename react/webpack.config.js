@@ -10,7 +10,7 @@ const proxy = { '/api': {
 module.exports = {
     entry: "./src/index.js",
     output: {
-        path: path.join(__dirname, "/dist"),
+        path: path.join(__dirname, "../eda/templates"),
         filename: "bundle.js"
     },
     devServer: { 

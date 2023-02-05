@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Pagination, Row } from 'react-bootstrap'
+import { Card, Pagination, Row, Spinner } from 'react-bootstrap'
 import {useHistory, useParams, Link} from "react-router-dom";
 import { Request } from './Request'
 
@@ -9,7 +9,9 @@ const limit=6;
 
 const EdaList=props=> {
    
-    const [responseData, setData] = React.useState({})
+    const [responseData, setData] = React.useState({})    
+    const [loading, setLoading] = React.useState(false)
+    
     const history = useHistory();
     const params = useParams();
     
@@ -19,10 +21,16 @@ const EdaList=props=> {
     const count = responseData.count;
     const pageCount = Math.trunc(count/limit)+1;
     
+    const onLoad=(data)=>{
+        setLoading(false); 
+        setData(data)
+    }
+    
     React.useEffect(()=>{ 
-        Request(`/eda/?search=${category}&limit=${limit}&offset=${limit*(page-1)}`, setData)
+        Request(`/eda/?search=${category}&limit=${limit}&offset=${limit*(page-1)}`, onLoad)
     }, [params.page, params.category])
     
+    if (loading) return <Spinner animation="border" role="status"/>
   
     const pages=[];
     for (let number = 1; number <= pageCount; number++) {

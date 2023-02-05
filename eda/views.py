@@ -1,7 +1,7 @@
 import uuid
 
 from django.http import HttpResponse, Http404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.decorators.cache import cache_page
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -9,6 +9,9 @@ from rest_framework import filters
 
 from .serializers import CategoriesSerializer, EdaSerializer, EdaDetailSerializer
 from .models import Categories, Eda, EdaItems
+
+def get_index_page(request):
+    return render(request, "index.html")
 
 @cache_page(86400)
 def get_image(request, guid):

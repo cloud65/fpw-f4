@@ -2,16 +2,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useParams} from "react-router-dom";
 import { Request } from './Request'
-import { Card, Nav, Container, Row, Col, Image  } from 'react-bootstrap'
+import { Card, Nav, Container, Row, Col, Image, Spinner  } from 'react-bootstrap'
 
 const Eda=props=> {
     const [data, setData] = React.useState({categories: [], ingredients:[], items:[]})
+    const [loading, setLoading] = React.useState(false)
+    
     const params = useParams();
     
+    const onLoad=(data)=>{
+        setLoading(false); 
+        setData(data)
+    }
+    
     React.useEffect(()=>{ 
-        Request(`/eda/${params.page}/`, setData)
+        Request(`/eda/${params.page}/`, onLoad)
     }, [params.page])
-     
+    
+    if (loading) return <Spinner animation="border" role="status"/>
+    
     const categories = data.categories.map(e=>{
         return <Nav.Item key={e.guid}>
             <Nav.Link as={Link}  to={'/list/1/'+e.guid}>{e.name}</Nav.Link>
